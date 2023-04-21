@@ -6,7 +6,7 @@ constructor(){
         host:"localhost",
         user: "root",
         password:"",
-        database: "mydb"
+        database: "nagarpalika"
     });
 }
 

@@ -2,19 +2,16 @@ var Database = require("./Database");
 class Admin{
     constructor(){
         this.id = 0;
-        this.name = "";
-        this.document1="";
-        this.document2="";
-        this.document3="";
-        this.document4="";
+        this.email="";
+        this.password="";
         this.db = new Database();
         this.query ="";
     }
    
 
 save = ()=>{
-    this.query = "INSERT INTO services (name, document1, document2, document3, document4)";
-    this.query +="VALUES('" + this.name +"','" + this.document1 +"','" + this.document2 +"','" + this.document3 +"','" + this.document4 +"')";
+    this.query = "INSERT INTO login (email, password)";
+    this.query +="VALUES('" + this.email +"','" + this.password +"')";
     return new Promise((resolve, reject)=>{
 
         this.db.query(this.query,(err, result)=>{
@@ -29,7 +26,7 @@ save = ()=>{
 
 
 list = ()=>{
-    this.query = "SELECT * FROM services ORDER BY name";
+    this.query = "SELECT * FROM login ORDER BY id";
     return new Promise((resolve, reject)=>{
 
         this.db.query(this.query,(err, result)=>{
