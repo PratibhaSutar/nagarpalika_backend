@@ -6,17 +6,19 @@ var router = express.Router();
 router.put("/save",  async(req, res) => {
     let body = req.body;
     let attendences = new Attendences();
-    attendences.date = body.date;
+    attendences.startdate = body.startdate;
     attendences.category_id = body.category_id;
     attendences.name = body.name;
     attendences.present = body.present;
     attendences.absent = body.absent;
+    
      attendences.save().then((result) => {
      res.end(JSON.stringify({ status: "success", data:result  }));
     }, (err) => {
          res.end(JSON.stringify({ status: "failed", data: err }));
 
     });
+
     //let result = await admin.save();
     //res.end(JSON.stringify({status:"success", data:reslult}));
 });
@@ -27,7 +29,7 @@ router.post("/update", async (req, res)=>{
     let body = req.body;
        let attendences = await new Attendences();
     attendences.id = body.id;
-    attendences.date = body.date;
+    attendences.startdate = body.startdate;
     attendences.category_id = body.category_id;
     attendences.name = body.name;
     attendences.present = body.present;
