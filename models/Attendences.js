@@ -2,7 +2,7 @@ var Database = require("./Database");
 class Attendences{
     constructor(){
         this.id = 0;
-        this.date = "";
+        this.startdate = "";
         this.category_id = 0;
         this.name = "";
         this.present = "";
@@ -15,10 +15,10 @@ class Attendences{
 //save record
 save = ()=>{
     this.query = 
-    "INSERT INTO attendences(date, category_id, name, present, absent)";
+    "INSERT INTO attendences(startdate, category_id, name, present, absent)";
     this.query +=
     "VALUES('" + 
-    this.date +
+    this.startdate +
     "', '" + 
     this.category_id +
     "', '" + 
@@ -28,6 +28,11 @@ save = ()=>{
     "', '" + 
     this.absent +
     "')";
+
+
+//     INSERT INTO attendences (category_id,name)
+// SELECT category_id,name FROM employee_details
+// WHERE category_id ='2';
     return new Promise((resolve, reject)=>{
            this.db.query(this.query,(err, result)=>{
             if(err)
@@ -40,7 +45,7 @@ save = ()=>{
 }
 //update record
 update = ()=>{
-    this.query = "UPDATE attendences SET date ='" + this.date +  "', present ='" + this.present + "',absent ='" + this.absent  +  "' WHERE id =" + this.id;
+    this.query = "UPDATE attendences SET startdate ='" + this.startdate +  "', present ='" + this.present + "',absent ='" + this.absent  +  "' WHERE id =" + this.id;
 
     return new Promise((resolve, reject)=>{
 
@@ -57,7 +62,6 @@ update = ()=>{
 
 //get list of records
 list = ()=>{
-    // this.query = "SELECT * FROM attendences ORDER BY id";
     this.query = "SELECT * FROM attendences ORDER BY id";
 
     return new Promise((resolve, reject)=>{
