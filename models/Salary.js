@@ -6,10 +6,15 @@ class Salary{
         this.employee_details_id = 0;
         this.date = "";
         this.days = "";
+        this.pf = "";
+        this.pt = "";
+        this.esic = "";
         this.salary = "";
+        this.ot = "";
         this.advance_amount = "";
         this.net_salary = "";
         this.paid_amount = "";
+        this.outstanding_amount = "";
         this.db = new Database();
         this.query ="";
     }
@@ -17,7 +22,7 @@ class Salary{
 //save record
 save = ()=>{
     this.query = 
-    "INSERT INTO salary(date, category_id,employee_details_id, days, salary, advance_amount, net_salary, paid_amount)";
+    "INSERT INTO salary(date, category_id,employee_details_id, days, pf, pt, esic, salary, ot, advance_amount, net_salary, paid_amount, outstanding_amount)";
     this.query +=
     "VALUES('" + 
     this.date +
@@ -28,13 +33,23 @@ save = ()=>{
     "', '" + 
     this.days +
     "', '" + 
+    this.pf +
+    "', '" + 
+    this.pt +
+    "', '" + 
+    this.esic +
+    "', '" + 
     this.salary +
+    "', '" + 
+    this.ot +
     "', '" + 
     this.advance_amount +
     "', '" + 
     this.net_salary +
     "', '" + 
     this.paid_amount +
+    "', '" + 
+    this.outstanding_amount +
     "')";
     return new Promise((resolve, reject)=>{
            this.db.query(this.query,(err, result)=>{
@@ -51,10 +66,15 @@ update = ()=>{
     this.query = "UPDATE salary ";
    this.query += "SET date = '" + this.date + "',";
    this.query += "days = '" + this.days + "' ";
+   this.query += "pf = '" + this.pf + "' ";
+   this.query += "pt = '" + this.pt + "',";
+   this.query += "esic = '" + this.esic + "' ";
    this.query += "salary = '" + this.salary + "',";
+   this.query += "ot = '" + this.ot + "',";
    this.query += "advance_amount = '" + this.advance_amount + "' ";
    this.query += "net_salary = '" + this.net_salary + "',";
-   this.query += "paid_amount = '" + this.paid_amount + "' ";;
+   this.query += "paid_amount = '" + this.paid_amount + "',";
+   this.query += "outstanding_amount = '" + this.outstanding_amount + "' ";;
    this.query += "WHERE id = " + this.id;
     return new Promise((resolve, reject)=>{
 
@@ -81,19 +101,7 @@ list = ()=>{
 
     });
 }
-// list = ()=>{
-//     this.query = "SELECT * FROM employee WHERE employee_details_id = " + this.employee_details_id + " ORDER BY id";
-//     return new Promise((resolve, reject)=>{
 
-//         this.db.query(this.query,(err, result)=>{
-//             if(err)
-//             reject(err);
-//             resolve(result);
-//         });
-
-//     });
-// }
-//get single record
 get = ()=>{
     this.query = "SELECT * FROM salary WHERE id =" + this.id;
     return new Promise((resolve, reject)=>{
